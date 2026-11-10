@@ -9,13 +9,11 @@ let timerInterval = null;
 let startTime = null;
 // O recorde dura só enquanto a página está aberta.
 let bestTime = null;
-
 function formatTime(totalSeconds) {
     const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, "0");
     const seconds = String(totalSeconds % 60).padStart(2, "0");
     return `${minutes}:${seconds}`;
 }
-
 function startTimer() {
     startTime = Date.now();
     timerInterval = setInterval(() => {
@@ -23,27 +21,22 @@ function startTimer() {
         timerDisplay.textContent = formatTime(elapsedSeconds);
     }, 1000);
 }
-
 function finishGame() {
     clearInterval(timerInterval);
     timerInterval = null;
-
     const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
     timerDisplay.textContent = formatTime(elapsedSeconds);
-
     if (bestTime === null || elapsedSeconds < bestTime) {
         bestTime = elapsedSeconds;
         recordDisplay.textContent = formatTime(bestTime);
     }
 }
-
 function resetTimer() {
     clearInterval(timerInterval);
     timerInterval = null;
     startTime = null;
     timerDisplay.textContent = "00:00";
 }
-
 // Inicia a comparação das cartas.
 function flipCard(event) {
     // Usa a carta que recebeu o clique.
